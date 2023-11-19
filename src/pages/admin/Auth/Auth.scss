@@ -1,0 +1,22 @@
+@import "/src/scss/index.scss";
+
+
+.auth {
+   background: linear-gradient(to bottom, #333, #000);
+   background-size: cover;
+   height: 100vh;
+   background-position: center;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   padding-top: 100px;
+
+
+   .logo {
+    width: 100px;
+    margin-bottom: 30px;
+   }
+
+
+}
+
