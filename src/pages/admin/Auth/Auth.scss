@@ -17,6 +17,27 @@
     margin-bottom: 30px;
    }
 
+   &_forms {
+      width: 450px;
+   }
+
+   .ui.menu {
+      .item {
+         width: 50%;
+         justify-content: center;
+         background-color: antiquewhite !important;
+         border-radius: 0 !important;
+         border-top: 4px solid $border-grey !important;
+         font-size: 18px;
+
+
+      }
+
+      .active {
+         font-weight: normal;
+         border-radius: 0 !important;
+       border-top-color: $primary !important;
+      }
+   }
 
 }
-
