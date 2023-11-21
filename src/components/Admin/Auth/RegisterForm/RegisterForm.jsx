@@ -1,7 +1,7 @@
 import React,{ useState} from 'react'
 import { Form } from 'semantic-ui-react'
 import { useFormik } from 'formik'
-import { initiaValues } from './RegisterForm.form'
+import { initiaValues, validationSchem } from './RegisterForm.form'
 import "./RegisterForm.scss"
 
 
@@ -11,12 +11,17 @@ export function RegisterForm() {
   const [error, setError] = useState("")
 
   const formik = useFormik({
+
     initialValues: initiaValues(),
+    validationSchema: validationSchem(),
+    validateOnChange:false,
+
     onSubmit: async (formValue) => {
       try {
+        setError("")
         console.log(formValue)
       } catch (error) {
-        console.log(error)
+        setError("error en el servidor")
 
       }
     }
@@ -27,15 +32,16 @@ export function RegisterForm() {
 
 
   return (
-   <Form className='register-form' onSubmit={formik.handleSubmit}>
-    <Form.Input name="email"placeholder="correo electronico" onChange={formik.handleChange} value= {formik.values.email}/>
-    <Form.Input name="password" type = "password"placeholder="contraseña"/>
-    <Form.Input name="repeatPassword" type = "password"placeholder=" repetir contraseña"/>
-    <Form.Checkbox name="conditionsAccepted" label = "he leido y acepto las politicas de privacidad."/>
-    <Form.Button type='submit' primary fluid>Crear cuenta</Form.Button>
+    <Form className="register-form" onSubmit={formik.handleSubmit}>
+        <Form.Input name="firstname" type="text" placeholder="Nombres" onChange={formik.handleChange} value={formik.values.firstname} error={formik.errors.firstname}/> 
+        <Form.Input name="lastname" type="text" placeholder="Apellidos" onChange={formik.handleChange} value={formik.values.lastname} error={formik.errors.lastname}/>
+        <Form.Input name="email" placeholder="Correo Electronico" onChange={formik.handleChange} value={formik.values.email} error={formik.errors.email}/>
+        <Form.Input name="password" type="password" placeholder="Contraseña" onChange={formik.handleChange} value={formik.values.password} error={formik.errors.password}/>
+        <Form.Input name="repeatPassword" type="password" placeholder="Repetir Contraseña" onChange={formik.handleChange} value={formik.values.repeatPassword} error={formik.errors.repeatPassword}/>
+        <Form.Checkbox name="conditionsAccepted" label="He leido y acepto las politicas de privacidad." onChange={ (_, data) => formik.setFieldValue("conditionsAccepted", data.checked)} checked={ formik.values.conditionsAccepted } error={formik.errors.conditionsAccepted}/>
+        <Form.Button type="submit" primary fluid loading={ formik.isSubmitting }>Crear Cuenta</Form.Button>
 
-    <p className='register-form_error'>{error}</p>
-
-   </Form>
+        <p className="register-form__error">{error}</p>
+    </Form>
   )
 }
