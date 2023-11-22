@@ -1,36 +1,35 @@
-import React,{ useState} from 'react'
-import { Form } from 'semantic-ui-react'
-import { useFormik } from 'formik'
-import { initiaValues, validationSchem } from './RegisterForm.form'
+import React, { useState } from 'react'
+import { Form } from "semantic-ui-react"
+import { useFormik } from "formik"
+import { Auth } from "../../../../api"
+import { initialValues, validationSchem } from "./RegisterForm.form"
 import "./RegisterForm.scss"
 
 
+const authController = new Auth()
 
+export function RegisterForm(props) {
 
-export function RegisterForm() {
-  const [error, setError] = useState("")
+    const { openLogin } = props
+    const [error, setError] = useState("")
 
-  const formik = useFormik({
+    const formik = useFormik({
 
-    initialValues: initiaValues(),
-    validationSchema: validationSchem(),
-    validateOnChange:false,
+        initialValues: initialValues(),
+        validationSchema: validationSchem(),
+        validateOnChange:false,
 
-    onSubmit: async (formValue) => {
-      try {
-        setError("")
-        console.log(formValue)
-      } catch (error) {
-        setError("error en el servidor")
-
-      }
-    }
-
-  })
-
-
-
-
+        onSubmit: async (formValue) => {
+            try {
+                setError("")
+                await authController.register(formValue)
+                openLogin()
+            } catch (error) {
+                setError("Error en el servidor")
+            }
+        }
+    })
+    
   return (
     <Form className="register-form" onSubmit={formik.handleSubmit}>
         <Form.Input name="firstname" type="text" placeholder="Nombres" onChange={formik.handleChange} value={formik.values.firstname} error={formik.errors.firstname}/> 

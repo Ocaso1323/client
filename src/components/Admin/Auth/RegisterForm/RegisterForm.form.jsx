@@ -1,20 +1,24 @@
-import * as yup from "yup"
+import * as Yup from "yup"
 
-export function initiaValues() {
-    return {
+
+export function initialValues(){
+    return{
+        firstname: "",
+        lastname: "",
         email: "",
         password: "",
         repeatPassword: "",
         conditionsAccepted: false,
     }
 }
+
 export function validationSchem(){
-    return yup.object({
-       firstname: yup.string().required("campo obligatorio") ,
-       lastname: yup.string().required("campo obligatorio"),
-       email: yup.string().email("el mail no es valido").required("campo obligatorio"),
-       password:yup.string().required("campo oblifatorio"),
-       repeatPassword:yup.string().required("campo obligatorio").oneOf([yup.ref("password")], "las contraseñas deben ser iguales"),
-       conditionsAccepted: yup.bool().isTrue(true),
+    return Yup.object({ 
+        firstname: Yup.string().required("Campo Obligatorio"),
+        lastname: Yup.string().required("Campo Obligatorio"),
+        email: Yup.string().email("El mail no es valido").required("Campo Obligatorio"),
+        password: Yup.string().required("Campo Obligatorio"),
+        repeatPassword: Yup.string().required("Campo Obligatorio").oneOf([Yup.ref("password")], "Las contraseñas deben ser iguales"),
+        conditionsAccepted: Yup.bool().isTrue(true),
     })
 }
