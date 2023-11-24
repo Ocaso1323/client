@@ -1,11 +1,12 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
-import { useFormik } from 'formik'
+import { Formik, useFormik } from 'formik'
 import { initialValues, validationSchema } from './LoginForm.Form'
 
 
 
 export  function LoginForm() {
+
     const formik = useFormik({
         initialValues: initialValues(),
         validationSchema : validationSchema(),
@@ -22,10 +23,11 @@ export  function LoginForm() {
     })
 
   return (
-    <Form>
-        <Form.Input className='email'placeholder= "correo electronico"/>
-        <Form.Input className='password'placeholder= "conraseña"/>
-        <Form.Button type='submit' primary fluid>Entrar</Form.Button>
+    <Form onSubmit={formik.handleSubmit}>
+        <Form.Input name='email' placeholder= "correo electronico" onChange={formik.handleChange} value={formik.values.email} error={formik.errors.email} />
+        <Form.Input type='password' name='password' placeholder= "contraseña" onChange={formik.handleChange} value={formik.values.password} error={formik.errors.password}/>
+
+        <Form.Button type='submit' primary fluid loading = {Formik.isSubmitting}>Entrar</Form.Button>
     </Form>
   )
 }
