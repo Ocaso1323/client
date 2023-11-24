@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Tab, Grid, GridColumn } from 'semantic-ui-react'
 import { iconLogo } from "../../../assets"
 import "./Auth.scss"
-import { RegisterForm } from '../../../components/Admin/Auth/RegisterForm'
+import { RegisterForm, LoginForm } from '../../../components/Admin/Auth'
+
 
 
 export function Auth() {
@@ -13,7 +14,7 @@ export function Auth() {
       menuItem: "ENTRAR",
       render: () => (
         <Tab.Pane>
-          <h2>LOGIN FORM</h2>
+          <LoginForm />
         </Tab.Pane>
       )
     },
