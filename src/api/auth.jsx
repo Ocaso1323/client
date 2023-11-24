@@ -51,4 +51,15 @@ export class Auth {
             throw error
         }
     }
+
+    async login (){
+        try {
+            const url = `${this.baseApi}/`
+
+        } catch (error) {
+            throw error
+
+        }
+    }
+
 }
